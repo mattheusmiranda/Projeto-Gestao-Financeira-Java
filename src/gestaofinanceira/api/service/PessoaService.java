@@ -17,7 +17,7 @@ public interface PessoaService {
 	
 	boolean excluir(String cpf);
 	
-	boolean excluir(Pessoa pessoa);
+	void excluir(Pessoa pessoa);
 	
 	boolean cpfJaCadastrado(String cpf);
 

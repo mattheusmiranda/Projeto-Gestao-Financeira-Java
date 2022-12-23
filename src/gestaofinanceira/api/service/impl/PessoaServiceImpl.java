@@ -12,12 +12,12 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public void cadastrar(String nome, String cpf, LocalDate dataNascimento) {
-		
+
 		if (cpfJaCadastrado(cpf)) {
 			System.out.println("Esse CPF já existe no banco de dados!");
 			return;
 		}
-		
+
 		Pessoa pessoa = new Pessoa();
 		pessoa.setNome(nome);
 		pessoa.setCpf(cpf);
@@ -40,7 +40,7 @@ public class PessoaServiceImpl implements PessoaService {
 	}
 
 	@Override
-	public void atualizar(Pessoa pessoaParaAtualizar) {		
+	public void atualizar(Pessoa pessoaParaAtualizar) {
 		if (pessoaParaAtualizar == null || !cpfJaCadastrado(pessoaParaAtualizar.getCpf())) {
 			System.out.println("Favor informar uma pessoa existente.");
 			return;
@@ -53,15 +53,15 @@ public class PessoaServiceImpl implements PessoaService {
 		return false;
 	}
 
-	@Override
-	public boolean excluir(Pessoa pessoa) {
-		return false;
+	public void excluir(Pessoa pessoaParaExcluir) {
+		PessoaRepository.excluir(pessoaParaExcluir);
+
 	}
 
-	@Override
 	public boolean cpfJaCadastrado(String cpf) {
 
-		return PessoaRepository
+		return PessoaRepository.CpfJaCadastrado(cpf);
+
 	}
-	
+
 }

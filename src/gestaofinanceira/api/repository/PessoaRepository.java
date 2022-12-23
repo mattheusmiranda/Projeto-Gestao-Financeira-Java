@@ -32,13 +32,25 @@ public class PessoaRepository {
 		}
 	}
 
-	public static void buscarCpfJaCadastrado(Pessoa cpf) {
+	public static boolean CpfJaCadastrado(String cpf) {
+		boolean existe = true;
+		boolean naoExiste = false;
 		for (Pessoa cpfBancoDeDados : LISTA_DE_PESSOAS) {
-			if (cpf.equals(cpfBancoDeDados)) {
+			if (cpfBancoDeDados.getCpf().contains(cpf)) {
 				System.out.println("CPF ja cadastrado");
+				return existe;
+			}
+			break;
+		}
+		return naoExiste;
+	}
+
+	public static void excluir(Pessoa pessoaParaExcluir) {
+		for (Pessoa excluirUsuario : LISTA_DE_PESSOAS) {
+			if (pessoaParaExcluir.equals(excluirUsuario)) {
+				LISTA_DE_PESSOAS.remove(pessoaParaExcluir);
 			}
 		}
-		//return false;
 	}
 
 }
