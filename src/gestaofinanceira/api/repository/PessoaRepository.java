@@ -1,5 +1,6 @@
 package gestaofinanceira.api.repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,30 @@ public class PessoaRepository {
 
 	public static void salvar(Pessoa pessoa) {
 		LISTA_DE_PESSOAS.add(pessoa);
+	}
+
+	public static void cadastrar(String nome, String cpf, LocalDate dataNascimento) {
+
+		if (CpfJaCadastrado(cpf)) {
+			System.out.println("Esse CPF já existe no banco de dados!");
+			return;
+		}
+
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome(nome);
+		pessoa.setCpf(cpf);
+		pessoa.setDataNascimento(dataNascimento);
+		PessoaRepository.salvar(pessoa);
+	}
+
+	public static void  buscarPorCpf(String cpf) {
+
+		for (Pessoa buscarPorCpf : LISTA_DE_PESSOAS) {
+			List<Pessoa> pessoasEncontradasPeloCpf = new ArrayList<>();
+			if (buscarPorCpf.getCpf().equals(cpf)) {
+				pessoasEncontradasPeloCpf.add(buscarPorCpf);
+			}
+		}
 	}
 
 	public static List<Pessoa> buscarPorNome(String nome) {
@@ -32,25 +57,23 @@ public class PessoaRepository {
 		}
 	}
 
-	public static boolean CpfJaCadastrado(String cpf) {
-		boolean existe = true;
-		boolean naoExiste = false;
-		for (Pessoa cpfBancoDeDados : LISTA_DE_PESSOAS) {
-			if (cpfBancoDeDados.getCpf().contains(cpf)) {
-				System.out.println("CPF ja cadastrado");
-				return existe;
-			}
-			break;
-		}
-		return naoExiste;
-	}
-
 	public static void excluir(Pessoa pessoaParaExcluir) {
 		for (Pessoa excluirUsuario : LISTA_DE_PESSOAS) {
 			if (pessoaParaExcluir.equals(excluirUsuario)) {
 				LISTA_DE_PESSOAS.remove(pessoaParaExcluir);
 			}
 		}
+	}
+
+	public static boolean CpfJaCadastrado(String cpf) {
+		for (Pessoa cpfBancoDeDados : LISTA_DE_PESSOAS) {
+			if (cpfBancoDeDados.getCpf().contains(cpf)) {
+				System.out.println("CPF ja cadastrado");
+				return true;
+			}
+			break;
+		}
+		return false;
 	}
 
 }

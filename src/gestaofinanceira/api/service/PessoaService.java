@@ -15,7 +15,7 @@ public interface PessoaService {
 	
 	void atualizar(Pessoa pessoa);
 	
-	boolean excluir(String cpf);
+	//boolean excluir(String cpf);
 	
 	void excluir(Pessoa pessoa);
 	
