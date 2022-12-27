@@ -42,5 +42,4 @@ public class ContaBancaria {
 		ContaBancaria other = (ContaBancaria) obj;
 		return numero == other.numero;
 	}
-	
 }

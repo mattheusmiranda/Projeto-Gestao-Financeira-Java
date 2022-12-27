@@ -32,11 +32,10 @@ public class Pessoa {
 		return contaBancaria;
 	}
 	public void setContaBancaria(ContaBancaria contaBancaria) {
-		this.contaBancaria = contaBancaria;
+		this.contaBancaria = contaBancaria; // feito
 	}
 	
 	public int getIdade() {
-		//TODO implementar logica para retornar idade com base na data de nascimento 
 		return 0;
 	}
 	

@@ -57,4 +57,5 @@ public class Despesa {
 		Despesa other = (Despesa) obj;
 		return Objects.equals(dataVencimento, other.dataVencimento) && descricao == other.descricao;
 	}
+	
 }

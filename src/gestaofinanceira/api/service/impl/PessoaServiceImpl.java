@@ -1,7 +1,6 @@
 package gestaofinanceira.api.service.impl;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import gestaofinanceira.api.domain.Pessoa;
@@ -11,15 +10,18 @@ import gestaofinanceira.api.service.PessoaService;
 public class PessoaServiceImpl implements PessoaService {
 
 	@Override
+	public void salvar(Pessoa pessoa) {
+		PessoaRepository.salvar(pessoa);
+	}
+	
+	@Override
 	public void cadastrar(String nome, String cpf, LocalDate dataNascimento) {
-
 		PessoaRepository.cadastrar(nome, cpf, dataNascimento);
 	}
 
 	@Override
 	public Pessoa buscarPorCpf(String cpf) {
-		PessoaRepository.buscarPorCpf(cpf);
-		return null;
+		return PessoaRepository.buscarPorCpf(cpf);
 	}
 
 	@Override
@@ -32,23 +34,20 @@ public class PessoaServiceImpl implements PessoaService {
 	}
 
 	@Override
-	public void atualizar(Pessoa pessoaParaAtualizar) {
-		if (pessoaParaAtualizar == null || !cpfJaCadastrado(pessoaParaAtualizar.getCpf())) {
-			System.out.println("Favor informar uma pessoa existente.");
-			return;
-		}
-		PessoaRepository.atualizar(pessoaParaAtualizar);
-	}
-
-	@Override
 	public void excluir(Pessoa pessoaParaExcluir) {
 		PessoaRepository.excluir(pessoaParaExcluir);
-
 	}
 
 	@Override
+	public boolean excluir(String cpf) {
+		Pessoa pessoa = buscarPorCpf(cpf);
+		excluir(pessoa);
+		return false;
+	}
+	
+	@Override
 	public boolean cpfJaCadastrado(String cpf) {
-		return PessoaRepository.CpfJaCadastrado(cpf);
+		return PessoaRepository.cpfJaCadastrado(cpf);
 	}
 
 }

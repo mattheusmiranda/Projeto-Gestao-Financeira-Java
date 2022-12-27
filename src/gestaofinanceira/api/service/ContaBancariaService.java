@@ -7,19 +7,20 @@ import gestaofinanceira.api.domain.Pessoa;
 
 public interface ContaBancariaService {
 	
-	// senha, dono, transferir, consultar saldo, buscar por numero da conta, buscar por nome do dono 
+	// senha, dono, transferir, consultar saldo, buscar por numero da conta, buscar por nome do dono
 	
-	boolean senha(ContaBancaria senha);
+	void criarConta(int numero, BigDecimal saldo, Pessoa dono);
 	
-	boolean dono(ContaBancaria nomeDono);
+	void salvar(ContaBancaria contaBancaria);
 	
-	void transferir(BigDecimal transferir);
+	boolean contaJaExiste(ContaBancaria contaBancaria);
 	
-	void consultarSaldo(BigDecimal consultarSaldo);
+	boolean verificarDono(Pessoa pessoa, ContaBancaria conta);
 	
-	void buscarPorNumeroDaConta(ContaBancaria buscarPorNumeroDaConta);
+	void transferir(BigDecimal transferir, ContaBancaria contaBancariaParaTransferir, ContaBancaria contaBancariaParaReceber);
 	
-	void buscarPorNomeDoDono(ContaBancaria buscarPorNomeDoDono);
-
+	void buscarPorNumeroDaConta(int numeroConta);
+	
+	void buscarPorNomeDoDono(String nome);
 
 }

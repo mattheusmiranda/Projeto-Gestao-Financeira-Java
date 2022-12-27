@@ -6,42 +6,49 @@ import gestaofinanceira.api.domain.Pessoa;
 import gestaofinanceira.api.repository.ContaBancariaRepository;
 import gestaofinanceira.api.service.ContaBancariaService;
 
-public class ContaBancariaServiceImpl implements ContaBancariaService{
-	
+public class ContaBancariaServiceImpl implements ContaBancariaService {
 
 	@Override
-	public boolean senha(ContaBancaria senha) {
-		return ContaBancariaRepository.senha(senha);
+	public void criarConta(int numero, BigDecimal saldo, Pessoa dono) {
+		ContaBancaria conta = new ContaBancaria();
+		conta.setNumero(numero);
+		conta.setSaldo(saldo);
+		conta.setDono(dono);
+		salvar(conta);
+	}
+
+	@Override
+	public void salvar(ContaBancaria contaBancaria) {
+		ContaBancariaRepository.salvar(contaBancaria);
+	}
+
+	@Override
+	public boolean verificarDono(Pessoa pessoa, ContaBancaria conta) {
+		return ContaBancariaRepository.verificarDono(pessoa, conta);
+	}
+
+	@Override
+	public void transferir(BigDecimal transferir, ContaBancaria contaBancariaParaTransferir, ContaBancaria contaBancariaParaReceber) {
+		contaBancariaParaTransferir.setSaldo(contaBancariaParaTransferir.getSaldo().subtract(transferir));
+		contaBancariaParaReceber.setSaldo(contaBancariaParaReceber.getSaldo().add(transferir));
 		
+		ContaBancariaRepository.salvar(contaBancariaParaTransferir);
+		ContaBancariaRepository.salvar(contaBancariaParaReceber);
 	}
 
 	@Override
-	public boolean dono(ContaBancaria nomeDono) {
-		return ContaBancariaRepository.dono(nomeDono);
+	public void buscarPorNumeroDaConta(int numeroConta) {
+		ContaBancariaRepository.buscarPorNumeroDaConta(numeroConta);
 	}
 
 	@Override
-	public void transferir(BigDecimal transferir) {
-		// TODO Auto-generated method stub
-		
+	public void buscarPorNomeDoDono(String nome) {
+		ContaBancariaRepository.buscarPorNomeDoDono(nome);
 	}
 
 	@Override
-	public void consultarSaldo(BigDecimal consultarSaldo) {
-		ContaBancariaRepository.consultarSaldo(consultarSaldo);
+	public boolean contaJaExiste(ContaBancaria contaBancaria) {
+		return ContaBancariaRepository.contaJaExiste(contaBancaria);
 	}
-
-	@Override
-	public void buscarPorNumeroDaConta(ContaBancaria buscarPorNumeroDaConta) {
-	
-		ContaBancariaRepository.buscarPorNumeroDaConta(buscarPorNumeroDaConta);
-	}
-
-	@Override
-	public void buscarPorNomeDoDono(ContaBancaria buscarPorNomeDoDono) {
-		ContaBancariaRepository.buscarPorNumeroDaConta(buscarPorNomeDoDono);
-		
-	}
-
 
 }
