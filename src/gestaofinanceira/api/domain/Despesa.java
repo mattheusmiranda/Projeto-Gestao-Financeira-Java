@@ -48,7 +48,7 @@ public class Despesa {
 		}else {
 			return 0;
 		}
-	}
+	} 
 	
 	@Override
 	public int hashCode() {

@@ -7,16 +7,12 @@ import java.util.List;
 import gestaofinanceira.api.domain.ContaBancaria;
 import gestaofinanceira.api.domain.Despesa;
 import gestaofinanceira.api.domain.TipoDespesa;
-import gestaofinanceira.api.service.impl.ContaBancariaServiceImpl;
 
 public class DespesaRepository {
 
 	private static List<Despesa> INFORMACOES_DE_DESPESA = new ArrayList<>();
 
-	public static void novaDespesa(TipoDespesa descricao, BigDecimal valor, LocalDate dataVencimento) { // faz sentido
-																										// implementar a
-																										// opcao de
-																										// conta paga
+	public static void novaDespesa(TipoDespesa descricao, BigDecimal valor, LocalDate dataVencimento) {
 		for (Despesa despesa : INFORMACOES_DE_DESPESA) {
 			if (despesa.getDataVencimento().equals(dataVencimento)) { // verificar aonde esse metodo deve ser passado
 				return;
@@ -45,47 +41,51 @@ public class DespesaRepository {
 
 	}
 
-	public static Despesa buscarUmaDespesas(Despesa tipoDespesa, LocalDate dataVencimento) {
+	public static Despesa buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento) {
 		for (Despesa tipoDespesa2 : INFORMACOES_DE_DESPESA) {
-			if (tipoDespesa2.equals(tipoDespesa) && tipoDespesa2.getDataVencimento().equals(dataVencimento)) { // verificar
-																												// se
-																												// entendi
-																												// certo
+			if (tipoDespesa2.getDescricao().equals(descricao)
+					&& tipoDespesa2.getDataVencimento().equals(dataVencimento)) {
 				return tipoDespesa2;
 			}
 		}
 		return null;
 	}
 
-	public static Despesa excluir(Despesa despesa) {
-		if (despesa.isIndicadorContaPaga() == true) {
-			for (Despesa tipoDespesa2 : INFORMACOES_DE_DESPESA) {
-				if (tipoDespesa2.equals(despesa)) {
-					INFORMACOES_DE_DESPESA.remove(despesa);
-					break; // break ou return?
+	public static void excluir(TipoDespesa descricao) {
+		for (Despesa despesa : INFORMACOES_DE_DESPESA) {
+			if (despesa.isIndicadorContaPaga() == true) {
+				for (Despesa tipoDespesa2 : INFORMACOES_DE_DESPESA) {
+					if (tipoDespesa2.getDescricao().equals(descricao)) {
+						INFORMACOES_DE_DESPESA.remove(tipoDespesa2);
+						return;
+					}
 				}
 			}
-			return null;
+			System.out.println("Conta não foi paga");
+			System.out.println("Pagar conta " + despesa.getDescricao());
+			DespesaRepository.pagarUmaDespesas(despesa.getDescricao(), despesa.getValor(), null);
 		}
-		DespesaRepository.pagarUmaDespesas(despesa, 0);
-		return null; // o return esta correto ?
 	}
 
-	public static void pagarUmaDespesas(Despesa despesa, int numero) {
+	public static Object pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta) {
+		// altera o indicador de pago da despesa, e salva a despesa
+		// e debita da conta o valor da despesa, e salva a conta
 		// ContaBancariaRepository conta = new ContaBancariaRepository();
-		ContaBancariaServiceImpl contas = new ContaBancariaServiceImpl();
-
-		if (DespesaRepository.buscarUmaDespesas(despesa, null) != null) { // verifica se a despesa existe
-			return;
-		} else {
-			for (ContaBancaria conta : ContaBancariaRepository.buscarTodos()) {
-				if (conta.getNumero() == numero) { // verifica se o numero da conta existe
-					contas.transferir(despesa.getValor(), conta, null); // verificar
-					INFORMACOES_DE_DESPESA.remove(despesa);
+		// ContaBancariaServiceImpl contas = new ContaBancariaServiceImpl();
+		for (ContaBancaria contas : ContaBancariaRepository.buscarTodos()) {
+			if (contas.getNumero() == conta.getNumero()) {
+				for (Despesa despesa : INFORMACOES_DE_DESPESA) {
+					if (despesa.getDescricao().equals(descricao)) {
+						conta.setSaldo(conta.getSaldo().subtract(valor)); // debita o valor da conta
+						despesa.setIndicadorContaPaga(true); // altera a conta para paga 
+						salvar(despesa);
+					} System.out.println("Conta inexistente");
 				}
-			}
 
+			}
+			System.out.print("Numero da conta inexistente");
 		}
+		return null;
 
 	}
 

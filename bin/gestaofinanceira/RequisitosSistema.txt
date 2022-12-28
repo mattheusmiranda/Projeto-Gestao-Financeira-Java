@@ -1,0 +1,15 @@
+Criar módulo de Despesa (Service, Repository, etc)
+
+criar nova despesa // não pode deixar cadastrar uma depesa de um certo tipo para uma data de vencimento que já exite
+salvar (tbm atualiza)
+buscar todas as despesas
+buscar uma só despesa por tipo de despesa E data de vencimento
+excluir uma despesa 
+pagar uma despesa (receber a conta via parametro)
+
+{
+   descricao: LUZ,
+   valor: 10,
+   dataVencimento: '10-12-2022',
+   indicadorContaPaga: true/false
+}

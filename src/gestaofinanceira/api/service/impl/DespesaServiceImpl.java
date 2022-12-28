@@ -2,6 +2,8 @@ package gestaofinanceira.api.service.impl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import gestaofinanceira.api.domain.ContaBancaria;
 import gestaofinanceira.api.domain.Despesa;
 import gestaofinanceira.api.domain.TipoDespesa;
 import gestaofinanceira.api.repository.DespesaRepository;
@@ -22,27 +24,26 @@ public class DespesaServiceImpl implements DespesaService {
 	}
 
 	@Override
-	public void buscarTodasAsDespesas(Despesa despesa) {
-		DespesaRepository.buscarTodasAsDespesas(despesa);
+	public void buscarTodasAsDespesas(TipoDespesa descricao, LocalDate dataVencimento) {
+		DespesaRepository.buscarUmaDespesas(descricao, dataVencimento);
 
 	}
 
 	@Override
-	public void buscarUmaDespesas(Despesa tipoDespesa, LocalDate dataVencimento) {
-		DespesaRepository.buscarUmaDespesas(tipoDespesa, dataVencimento);
+	public void excluir(TipoDespesa descricao) {
+	
+		DespesaRepository.excluir(descricao);
+	}
+
+	@Override
+	public void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta) {
+		DespesaRepository.pagarUmaDespesas (descricao, valor,  conta);
 
 	}
 
 	@Override
-	public void excluir(Despesa despesa) {
-		DespesaRepository.excluir(despesa);
-
+	public void buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento) {
+		DespesaRepository.buscarUmaDespesas(descricao, dataVencimento);
+		
 	}
-
-	@Override
-	public void pagarUmaDespesas(Despesa despesa, int numero) {
-		DespesaRepository.pagarUmaDespesas(despesa, numero);
-
-	}
-
 }

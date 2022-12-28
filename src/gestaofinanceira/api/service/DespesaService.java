@@ -2,6 +2,8 @@ package gestaofinanceira.api.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import gestaofinanceira.api.domain.ContaBancaria;
 import gestaofinanceira.api.domain.Despesa;
 import gestaofinanceira.api.domain.TipoDespesa;
 
@@ -11,11 +13,11 @@ public interface DespesaService {
 	
 	void salvar(Despesa despesas);
 	
-	void buscarTodasAsDespesas(Despesa despesa);
-	
-	void buscarUmaDespesas(Despesa tipoDespesa, LocalDate dataVencimento); // verificar sobre os tipos TipoDespesa
-	
-	void excluir(Despesa despesa);
-	
-	void pagarUmaDespesas(Despesa despesa, int numero);
+	void buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento); // verificar sobre os tipos TipoDespesa
+
+	void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta);
+
+	void excluir(TipoDespesa descricao);
+
+	void buscarTodasAsDespesas(TipoDespesa descricao, LocalDate dataVencimento);
 }
