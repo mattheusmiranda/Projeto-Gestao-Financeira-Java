@@ -9,6 +9,7 @@ public class Despesa {
 	private TipoDespesa descricao;
 	private BigDecimal valor;
 	private LocalDate dataVencimento;
+	private boolean indicadorContaPaga;
 	
 	public TipoDespesa getDescricao() {
 		return descricao;
@@ -28,6 +29,13 @@ public class Despesa {
 	public void setDataVencimento(LocalDate dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
+	public boolean isIndicadorContaPaga() {
+		return indicadorContaPaga;
+	}
+	public void setIndicadorContaPaga(boolean indicadorContaPaga) {
+		this.indicadorContaPaga = indicadorContaPaga;
+	}
+	
 	public double getJuros() {
 		if(TipoDespesa.LUZ.equals(descricao)) {
 			return 1;
@@ -57,5 +65,6 @@ public class Despesa {
 		Despesa other = (Despesa) obj;
 		return Objects.equals(dataVencimento, other.dataVencimento) && descricao == other.descricao;
 	}
+
 	
 }
