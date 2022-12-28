@@ -75,9 +75,8 @@ public class TelaPessoa {
 	public void buscarPorCpf() {
 		
 		System.out.println("Informe o CPF para a busca: ");
-		String cpfDigitado = scanner.next();
-		pessoaService.buscarPorCpf(cpfDigitado);
-		
+		String cpfDigitado = scanner.nextLine();
+		pessoaService.buscarPorCpf(cpfDigitado); // implementar toString
 	}
 	
 	public void buscarPorNome() {
