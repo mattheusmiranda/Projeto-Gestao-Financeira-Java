@@ -21,7 +21,9 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public Pessoa buscarPorCpf(String cpf) {
-		return PessoaRepository.buscarPorCpf(cpf);
+		 PessoaRepository.buscarPorCpf(cpf);
+		return null;
+		
 	}
 
 	@Override
@@ -33,21 +35,23 @@ public class PessoaServiceImpl implements PessoaService {
 		return PessoaRepository.buscarPorNome(nome);
 	}
 
-	@Override
-	public void excluir(Pessoa pessoaParaExcluir) {
-		PessoaRepository.excluir(pessoaParaExcluir);
-	}
 
 	@Override
 	public boolean excluir(String cpf) {
-		Pessoa pessoa = buscarPorCpf(cpf);
-		excluir(pessoa);
 		return false;
+	
 	}
 	
 	@Override
 	public boolean cpfJaCadastrado(String cpf) {
 		return PessoaRepository.cpfJaCadastrado(cpf);
+	}
+
+	@Override
+	public void excluir(Pessoa pessoa) {
+		PessoaRepository.excluir(pessoa);
+		return;
+		
 	}
 
 }

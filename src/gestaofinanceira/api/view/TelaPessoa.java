@@ -15,7 +15,7 @@ public class TelaPessoa {
 	
 	static PessoaService pessoaService = new PessoaServiceImpl();
 	
-	public static void imprimirMenu() {
+	public void imprimirMenu() {
 		int opcaoSelecionada = 0;
 		while (opcaoSelecionada >= 0 && opcaoSelecionada <= 3) {
 			System.out.println("------- MENU DE PESSOA --------------");
@@ -70,32 +70,33 @@ public class TelaPessoa {
 		
 		novaPessoa.setDataNascimento(dataLocalDate);
 	
-		//pessoaService.salvar(novaPessoa);
+		pessoaService.salvar(novaPessoa);
 	}
 	
 	public static void buscarPorCpf() {
 		
-		Pessoa novaPessoa = new Pessoa();
-		
 		System.out.println("Informe o CPF para a busca: ");
 		String cpfDigitado = scanner.nextLine();
 		PessoaRepository.buscarPorCpf(cpfDigitado);
-		// TODO implementar toStrings
+
 	}
 	
 	public static void buscarPorNome() {
 		
 		System.out.println("Informe o nome para a busca: ");
-		String nomeDigitado = scanner.next();
+		String nomeDigitado = scanner.nextLine();
 		pessoaService.buscarPorNome(nomeDigitado);
 		
 	}
 	
 	public static void excluir() {
+	
+		Pessoa pessoa = new Pessoa();
 		
 		System.out.println("Informe o CPF para excluir: ");
 		String cpfDigitado = scanner.nextLine();
-		pessoaService.excluir(cpfDigitado);
+		pessoa.setCpf(cpfDigitado);
+		pessoaService.excluir(pessoa);
 	
 	}
 	

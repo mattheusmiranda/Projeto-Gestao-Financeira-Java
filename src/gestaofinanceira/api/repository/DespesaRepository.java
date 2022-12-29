@@ -36,19 +36,21 @@ public class DespesaRepository {
 
 	}
 
-	public static List<Despesa> buscarTodasAsDespesas(Despesa despesa) {
+	public static List<Despesa> buscarTodasAsDespesas() {
 		return INFORMACOES_DE_DESPESA;
 
 	}
 
-	public static Despesa buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento) {
+	public static void buscarUmaDespesa(TipoDespesa descricao, LocalDate dataVencimento) {
 		for (Despesa tipoDespesa2 : INFORMACOES_DE_DESPESA) {
-			if (tipoDespesa2.getDescricao().equals(descricao)
-					&& tipoDespesa2.getDataVencimento().equals(dataVencimento)) {
-				return tipoDespesa2;
+			if (tipoDespesa2.getDescricao().equals(descricao)) {
+				if (tipoDespesa2.getDataVencimento().equals(dataVencimento)) {
+					System.out.println(tipoDespesa2);
+					return ;
+				}
 			}
 		}
-		return null;
+		System.out.println("nao");
 	}
 
 	public static void excluir(TipoDespesa descricao) {
@@ -67,7 +69,7 @@ public class DespesaRepository {
 		}
 	}
 
-	public static Object pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta) {
+	public static void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta) {
 		// altera o indicador de pago da despesa, e salva a despesa
 		// e debita da conta o valor da despesa, e salva a conta
 		// ContaBancariaRepository conta = new ContaBancariaRepository();
@@ -77,16 +79,16 @@ public class DespesaRepository {
 				for (Despesa despesa : INFORMACOES_DE_DESPESA) {
 					if (despesa.getDescricao().equals(descricao)) {
 						conta.setSaldo(conta.getSaldo().subtract(valor)); // debita o valor da conta
-						despesa.setIndicadorContaPaga(true); // altera a conta para paga 
+						despesa.setIndicadorContaPaga(true); // altera a conta para paga
 						salvar(despesa);
-					} System.out.println("Conta inexistente");
+					}
+					System.out.println("Conta inexistente");
 				}
 
 			}
 			System.out.print("Numero da conta inexistente");
 		}
-		return null;
 
 	}
-
+	
 }

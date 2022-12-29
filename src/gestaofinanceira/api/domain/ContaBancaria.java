@@ -1,6 +1,7 @@
 package gestaofinanceira.api.domain;
 
 import java.math.BigDecimal;
+
 import java.util.Objects;
 
 public class ContaBancaria {
@@ -42,4 +43,6 @@ public class ContaBancaria {
 		ContaBancaria other = (ContaBancaria) obj;
 		return numero == other.numero;
 	}
+
+
 }

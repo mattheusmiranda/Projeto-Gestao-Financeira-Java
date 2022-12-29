@@ -32,10 +32,9 @@ public class Pessoa {
 		return contaBancaria;
 	}
 	
-	//toString
 	@Override
 	public String toString() {
-		return "Pessoa [cpf=" + cpf + "]";
+		return "Nome " + nome;
 	}
 	public void setContaBancaria(ContaBancaria contaBancaria) {
 		this.contaBancaria = contaBancaria;

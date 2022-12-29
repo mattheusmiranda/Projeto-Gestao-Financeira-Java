@@ -6,6 +6,10 @@ import java.util.Objects;
 
 public class Despesa {
 
+	@Override
+	public String toString() {
+		return "Despesa: " + descricao;
+	}
 	private TipoDespesa descricao;
 	private BigDecimal valor;
 	private LocalDate dataVencimento;

@@ -42,13 +42,14 @@ public class PessoaRepository {
 		PessoaRepository.salvar(pessoa);
 	}
 
-	public static Pessoa buscarPorCpf(String cpf) {
+	public static void buscarPorCpf(String cpf) {
 		for (Pessoa pessoa : LISTA_DE_PESSOAS) {
 			if (pessoa.getCpf().equals(cpf)) {
-				return pessoa;
+				System.out.println(pessoa);
+				return;
 			}
 		}
-		return null;
+		return;
 	}
 
 	public static List<Pessoa> buscarPorNome(String nome) {
@@ -56,21 +57,23 @@ public class PessoaRepository {
 		for (Pessoa pessoa : LISTA_DE_PESSOAS) {
 			if (pessoa.getNome().startsWith(nome)) {
 				pessoasEncontradas.add(pessoa);
+				System.out.println(pessoa);
 			}
 		}
 		return pessoasEncontradas;
 	}
 
-	public static void excluir(Pessoa pessoaParaExcluir) {
-		for (Pessoa pessoa : LISTA_DE_PESSOAS) {
-			if (pessoaParaExcluir.equals(pessoa)) {
-				LISTA_DE_PESSOAS.remove(pessoaParaExcluir);
-			}
-		}
-	}
+	/*
+	 * public static void excluir(String cpf) { for (Pessoa pessoa :
+	 * LISTA_DE_PESSOAS) { if (LISTA_DE_PESSOAS.contains(pessoa)) {
+	 * LISTA_DE_PESSOAS.remove(pessoa); } } }
+	 */
 
-	public static void excluir(String cpf) {
-		excluir(PessoaRepository.buscarPorCpf(cpf)); // implementei 
+	public static void excluir(Pessoa pessoa) {
+		
+			if (LISTA_DE_PESSOAS.contains(pessoa))
+				LISTA_DE_PESSOAS.remove(pessoa);
+			return;
 	}
 
 	public static boolean cpfJaCadastrado(String cpf) {

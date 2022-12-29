@@ -6,13 +6,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import gestaofinanceira.api.domain.ContaBancaria;
+import gestaofinanceira.api.domain.Pessoa;
 import gestaofinanceira.api.repository.ContaBancariaRepository;
+import gestaofinanceira.api.service.impl.ContaBancariaServiceImpl;
 
 public class TelaContaBancaria {
 
 	Scanner scanner = new Scanner(System.in);
-	
-	 DespesaService = new DespesaService();
 	
 	public void imprimirMenu() {
 		int opcaoSelecionada = 0;
@@ -42,7 +42,8 @@ public class TelaContaBancaria {
 				buscarPeloNome();
 			}
 			else if (opcaoSelecionada == 0) {
-				TelaPessoa.imprimirMenu(); // TODO verificar
+				TelaPessoa telaPessoa = new TelaPessoa();
+				telaPessoa.imprimirMenu();
 				opcaoSelecionada = -1;
 			} else {
 				System.out.println("ATENÇÃO!!! Opção inválida, digite uma das opções abaixo");
@@ -54,30 +55,33 @@ public class TelaContaBancaria {
 	public void cadastrar() {
 		
 		ContaBancaria novaConta = new ContaBancaria();
+		Pessoa pessoa = new Pessoa();
 		
 		System.out.println("Informe o numero da conta: ");
 		int numeroDigitado = scanner.nextInt();
-		novaConta.setDescricao(null);  // TODO verificar se aceita pelo tipo 
+		novaConta.setNumero(numeroDigitado);  // TODO verificar se aceita pelo tipo 
 		
 		System.out.println("Informe o valor do seu saldo: ");
 		BigDecimal valorDigitado = scanner.nextBigDecimal();
 		novaConta.setSaldo(valorDigitado);
 		
-		System.out.println("");
-		String dataDigitada = scanner.nextLine();
-		LocalDate dataLocalDate = LocalDate.parse(dataDigitada, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		System.out.println("Informe o nome do dono: ");
+		String nome = scanner.nextLine();
+		pessoa.setNome(nome);
+		novaConta.setDono(pessoa);
 		
-		novaConta.setdataVencimento(dataLocalDate);
-	
-		ContaBancariaRepository.salvar(novaDespesa);
+		ContaBancariaRepository.salvar(novaConta);
 	}
 	
 	public void procurarConta() {
 		
 		ContaBancaria procurarConta = new ContaBancaria();
+		Pessoa pessoa = new Pessoa();
 		
 		System.out.println("Informe o nome do dono da conta: ");
-		// TODO terminar de implementar dps, verificar em conta bancaria (dono)
+		String nome = scanner.nextLine();
+		pessoa.setNome(nome);
+		procurarConta.setDono(pessoa);
 		
 		System.out.println("Informe o numero da conta: ");
 		int numeroConta = scanner.nextInt();
@@ -85,7 +89,27 @@ public class TelaContaBancaria {
 		
 	}
 	
-	// TODO imolementar o transferir 
+	public void transferir() {
+		// BigDecimal transferir, ContaBancaria contaBancariaParaTransferir, ContaBancaria contaBancariaParaReceber
+		ContaBancaria conta = new ContaBancaria();
+		ContaBancaria conta2 = new ContaBancaria();
+		
+		System.out.println("Informe o valor pra ser transferido: ");
+		BigDecimal valorDigitado = new BigDecimal(scanner.nextLine());
+		
+		System.out.println("Informe o numero da sua conta: ");
+		int num = scanner.nextInt();
+		conta.setNumero(num);
+		
+		System.out.println("Informe o numero da conta que voce deseja transferir: ");
+		int num2 = scanner.nextInt();
+		conta2.setNumero(num);
+	
+		ContaBancariaServiceImpl av = new ContaBancariaServiceImpl();
+		av.transferir(valorDigitado, conta, conta2);
+		
+	
+	}
 	
 	
 	public void buscarComONumeroDaConta() {
@@ -103,27 +127,5 @@ public class TelaContaBancaria {
 		
 		ContaBancariaRepository.buscarPorNomeDoDono(nomeDigitado);
 	}	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
