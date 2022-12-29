@@ -5,19 +5,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import gestaofinanceira.api.domain.Pessoa;
+import gestaofinanceira.api.repository.PessoaRepository;
 import gestaofinanceira.api.service.PessoaService;
 import gestaofinanceira.api.service.impl.PessoaServiceImpl;
 
 public class TelaPessoa {
 
-	Scanner scanner = new Scanner(System.in);
+	static Scanner scanner = new Scanner(System.in);
 	
-	PessoaService pessoaService = new PessoaServiceImpl();
+	static PessoaService pessoaService = new PessoaServiceImpl();
 	
-	public void imprimirMenu() {
+	public static void imprimirMenu() {
 		int opcaoSelecionada = 0;
 		while (opcaoSelecionada >= 0 && opcaoSelecionada <= 3) {
-			System.out.println("------- MENU DE PESSOA -------");
+			System.out.println("------- MENU DE PESSOA --------------");
 			System.out.println("- 1) Cadastrar                      -");
 			System.out.println("- 2) Buscar por CPF                 -");
 			System.out.println("- 3) Buscar por Nome                -");
@@ -51,7 +52,7 @@ public class TelaPessoa {
 		}
 	}
 	
-	public void cadastrar() {
+	public static void cadastrar() {
 		
 		Pessoa novaPessoa = new Pessoa();
 		
@@ -69,17 +70,20 @@ public class TelaPessoa {
 		
 		novaPessoa.setDataNascimento(dataLocalDate);
 	
-		pessoaService.salvar(novaPessoa);
+		//pessoaService.salvar(novaPessoa);
 	}
 	
-	public void buscarPorCpf() {
+	public static void buscarPorCpf() {
+		
+		Pessoa novaPessoa = new Pessoa();
 		
 		System.out.println("Informe o CPF para a busca: ");
 		String cpfDigitado = scanner.nextLine();
-		pessoaService.buscarPorCpf(cpfDigitado); // implementar toString
+		PessoaRepository.buscarPorCpf(cpfDigitado);
+		// TODO implementar toStrings
 	}
 	
-	public void buscarPorNome() {
+	public static void buscarPorNome() {
 		
 		System.out.println("Informe o nome para a busca: ");
 		String nomeDigitado = scanner.next();
@@ -87,7 +91,7 @@ public class TelaPessoa {
 		
 	}
 	
-	public void excluir() {
+	public static void excluir() {
 		
 		System.out.println("Informe o CPF para excluir: ");
 		String cpfDigitado = scanner.nextLine();
@@ -95,12 +99,12 @@ public class TelaPessoa {
 	
 	}
 	
-	public void verificarCpf() {
+	public static void verificarCpf() {
 		System.out.println("Informe o CPF para verificar: ");
 		String cpfDigitado = scanner.nextLine();
 		pessoaService.cpfJaCadastrado(cpfDigitado);
 
-
 	}
+	
 	
 }

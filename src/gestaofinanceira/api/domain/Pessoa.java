@@ -31,8 +31,14 @@ public class Pessoa {
 	public ContaBancaria getContaBancaria() {
 		return contaBancaria;
 	}
+	
+	//toString
+	@Override
+	public String toString() {
+		return "Pessoa [cpf=" + cpf + "]";
+	}
 	public void setContaBancaria(ContaBancaria contaBancaria) {
-		this.contaBancaria = contaBancaria; // feito
+		this.contaBancaria = contaBancaria;
 	}
 	
 	public int getIdade() {

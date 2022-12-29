@@ -30,17 +30,18 @@ public class Inicio {
 			opcaoSelecionada = Integer.parseInt(scanner.nextLine());
 			
 			if (opcaoSelecionada == 1) {
-				
 				telaPessoa.imprimirMenu();
 				
 			} else if (opcaoSelecionada == 2) {
-				//TODO ir para a tela de despesa
+				telaDespesa.imprimirMenu();
+				
 			} else if (opcaoSelecionada == 3) {
-				//TODO ir para a tela de conta bancária
+				telaContaBancaria.imprimirMenu();
 			} else if (opcaoSelecionada == 0) {
-				//TODO encerrar o programa
+				return;
 			} else {
 				//TODO opção inválida, deixar digitar novamente
+				System.out.println("Opção invalida"); // TODO pensar depois 
 			}
 		}
 	}

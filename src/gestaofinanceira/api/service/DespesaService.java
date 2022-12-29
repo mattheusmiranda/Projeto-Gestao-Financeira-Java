@@ -19,5 +19,5 @@ public interface DespesaService {
 
 	void excluir(TipoDespesa descricao);
 
-	void buscarTodasAsDespesas(TipoDespesa descricao, LocalDate dataVencimento);
+	void buscarTodasAsDespesas(TipoDespesa descricao, LocalDate dataVencimento);	
 }
