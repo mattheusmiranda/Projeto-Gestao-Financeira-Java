@@ -10,50 +10,58 @@ public class Despesa {
 	private BigDecimal valor;
 	private LocalDate dataVencimento;
 	private boolean indicadorContaPaga;
-	
+
 	public TipoDespesa getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(TipoDespesa descricao) {
 		this.descricao = descricao;
 	}
+
 	public BigDecimal getValor() {
 		return valor;
 	}
+
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
+
 	public LocalDate getDataVencimento() {
 		return dataVencimento;
 	}
+
 	public void setDataVencimento(LocalDate dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
+
 	public boolean isIndicadorContaPaga() {
 		return indicadorContaPaga;
 	}
+
 	public void setIndicadorContaPaga(boolean indicadorContaPaga) {
 		this.indicadorContaPaga = indicadorContaPaga;
 	}
-	
+
 	public double getJuros() {
-		if(TipoDespesa.LUZ.equals(descricao)) {
+		if (TipoDespesa.LUZ.equals(descricao)) {
 			return 1;
-		}else if(TipoDespesa.FATURA_CARTAO.equals(descricao)) {
+		} else if (TipoDespesa.FATURA_CARTAO.equals(descricao)) {
 			return 1;
-		}else if(TipoDespesa.AGUA.equals(descricao)) {
+		} else if (TipoDespesa.AGUA.equals(descricao)) {
 			return 1;
-		}else if(TipoDespesa.NETFLIX.equals(descricao)) {
+		} else if (TipoDespesa.NETFLIX.equals(descricao)) {
 			return 1;
-		}else {
+		} else {
 			return 0;
 		}
-	} 
-	
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(dataVencimento, descricao);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -65,12 +73,12 @@ public class Despesa {
 		Despesa other = (Despesa) obj;
 		return Objects.equals(dataVencimento, other.dataVencimento) && descricao == other.descricao;
 	}
+
 	@Override
 	public String toString() {
-		return "\nDescricao: " + descricao + "\nValor: " + valor + "\nDataVencimento: " + dataVencimento 
-				+ "\nStatus da conta: " + indicadorContaPaga + "\n-------------------------";
+		return "\nDescricao: " + descricao + "\nValor: " + valor + "\nDataVencimento: " + dataVencimento
+				+ "\nStatus da conta: " + (indicadorContaPaga ? "Pago" : "Não foi pago")
+				+ "\n-------------------------";
 	}
 
-	
-	
 }

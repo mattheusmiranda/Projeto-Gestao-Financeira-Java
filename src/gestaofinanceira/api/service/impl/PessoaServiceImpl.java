@@ -13,7 +13,7 @@ public class PessoaServiceImpl implements PessoaService {
 	public void salvar(Pessoa pessoa) {
 		PessoaRepository.salvar(pessoa);
 	}
-	
+
 	@Override
 	public void cadastrar(String nome, String cpf, LocalDate dataNascimento) {
 		PessoaRepository.cadastrar(nome, cpf, dataNascimento);
@@ -21,9 +21,9 @@ public class PessoaServiceImpl implements PessoaService {
 
 	@Override
 	public Pessoa buscarPorCpf(String cpf) {
-		 PessoaRepository.buscarPorCpf(cpf);
+		PessoaRepository.buscarPorCpf(cpf);
 		return null;
-		
+
 	}
 
 	@Override
@@ -35,13 +35,12 @@ public class PessoaServiceImpl implements PessoaService {
 		return PessoaRepository.buscarPorNome(nome);
 	}
 
-
 	@Override
 	public boolean excluir(String cpf) {
 		return false;
-	
+
 	}
-	
+
 	@Override
 	public boolean cpfJaCadastrado(String cpf) {
 		return PessoaRepository.cpfJaCadastrado(cpf);
@@ -51,7 +50,7 @@ public class PessoaServiceImpl implements PessoaService {
 	public void excluir(Pessoa pessoa) {
 		PessoaRepository.excluir(pessoa);
 		return;
-		
+
 	}
 
 }

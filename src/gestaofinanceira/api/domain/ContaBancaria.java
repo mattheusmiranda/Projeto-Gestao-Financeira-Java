@@ -19,7 +19,6 @@ public class ContaBancaria {
 		this.saldoPosPagamento = saldo.subtract(saldoPosPagamento);
 	}
 
-	
 	public int getNumero() {
 		return numero;
 	}

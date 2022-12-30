@@ -1,7 +1,9 @@
 package gestaofinanceira.api;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
+import gestaofinanceira.api.domain.Pessoa;
 import gestaofinanceira.api.view.TelaContaBancaria;
 import gestaofinanceira.api.view.TelaDespesa;
 import gestaofinanceira.api.view.TelaPessoa;
@@ -31,10 +33,8 @@ public class Inicio {
 			
 			if (opcaoSelecionada == 1) {
 				telaPessoa.imprimirMenu();
-				
 			} else if (opcaoSelecionada == 2) {
 				telaDespesa.imprimirMenu();
-				
 			} else if (opcaoSelecionada == 3) {
 				telaContaBancaria.imprimirMenu();
 			} else if (opcaoSelecionada == 0) {

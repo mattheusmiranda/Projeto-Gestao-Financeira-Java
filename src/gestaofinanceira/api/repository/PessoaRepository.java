@@ -14,6 +14,15 @@ public class PessoaRepository {
 
 	private static List<Pessoa> LISTA_DE_PESSOAS = new ArrayList<>();
 
+	static {
+		// Cadastrar uma pessoa
+		Pessoa pessoa = new Pessoa();
+		pessoa.setNome("maske");
+		pessoa.setCpf("123");
+		pessoa.setDataNascimento(LocalDate.now());
+		LISTA_DE_PESSOAS.add(pessoa);
+	}
+
 	public static void salvar(Pessoa pessoa) {
 		for (Pessoa pessoaBancoDeDados : LISTA_DE_PESSOAS) {
 			if (pessoa.equals(pessoaBancoDeDados)) {
@@ -70,11 +79,11 @@ public class PessoaRepository {
 	 */
 
 	public static void excluir(Pessoa pessoa) {
-		
-			if (LISTA_DE_PESSOAS.contains(pessoa))
-				LISTA_DE_PESSOAS.remove(pessoa);
-			System.out.println("Usuario excluido");
-			return;
+
+		if (LISTA_DE_PESSOAS.contains(pessoa))
+			LISTA_DE_PESSOAS.remove(pessoa);
+		System.out.println("Usuario excluido");
+		return;
 	}
 
 	public static boolean cpfJaCadastrado(String cpf) {
@@ -82,7 +91,7 @@ public class PessoaRepository {
 			if (pessoa.getCpf().equals(cpf)) {
 				System.out.println("CPF ja cadastrado");
 				return true;
-			}else {
+			} else {
 				System.out.println("CPF não foi cadastrado");
 			}
 		}

@@ -12,40 +12,45 @@ public class Pessoa {
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
+
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
 	public ContaBancaria getContaBancaria() {
 		return contaBancaria;
 	}
-	
 
-	
 	@Override
 	public String toString() {
 		return "Nome: " + nome + "\nCPF: " + cpf + "\nData Nascimento: " + dataNascimento;
 	}
+
 	public int getIdade() {
 		return 0;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(cpf);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -58,5 +63,4 @@ public class Pessoa {
 		return Objects.equals(cpf, other.cpf);
 	}
 
-	
 }

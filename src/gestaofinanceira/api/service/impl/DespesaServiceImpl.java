@@ -31,19 +31,19 @@ public class DespesaServiceImpl implements DespesaService {
 
 	@Override
 	public void excluir(TipoDespesa descricao) {
-	
+
 		DespesaRepository.excluir(descricao);
 	}
 
 	@Override
-	public void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, int numeroConta) {
-		DespesaRepository.pagarUmaDespesas (descricao, valor,  numeroConta);
+	public void pagarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento, int numeroConta) {
+		DespesaRepository.pagarUmaDespesas(descricao, dataVencimento, numeroConta);
 
 	}
 
 	@Override
 	public void buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento) {
 		DespesaRepository.buscarUmaDespesa(descricao, dataVencimento);
-		
+
 	}
 }

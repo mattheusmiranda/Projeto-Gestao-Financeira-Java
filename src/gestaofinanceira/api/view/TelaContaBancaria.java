@@ -30,19 +30,15 @@ public class TelaContaBancaria {
 			
 			if (opcaoSelecionada == 1) {
 				cadastrar();
-				
 			} else if (opcaoSelecionada == 2) {
 				procurarConta();
 			} else if (opcaoSelecionada == 3) {
 				transferir();
-			}else if( opcaoSelecionada == 4) {
+			} else if( opcaoSelecionada == 4) {
 				buscarComONumeroDaConta();
-			}else if( opcaoSelecionada == 5) {
+			} else if( opcaoSelecionada == 5) {
 				buscarPeloNome();
-			}
-			else if (opcaoSelecionada == 0) {
-				TelaPessoa telaPessoa = new TelaPessoa();
-				telaPessoa.imprimirMenu();
+			} else if (opcaoSelecionada == 0) {
 				opcaoSelecionada = -1;
 			} else {
 				System.out.println("ATENÇÃO!!! Opção inválida, digite uma das opções abaixo");
@@ -61,8 +57,7 @@ public class TelaContaBancaria {
 		
 		pessoa.setNome(nome);
 		novaConta.setDono(pessoa);
-		
-		scanner.nextLine();
+
 		System.out.println("Informe o valor do seu saldo: ");
 		BigDecimal valorDigitado = new BigDecimal(scanner.nextLine());
 		novaConta.setSaldo(valorDigitado);

@@ -10,14 +10,14 @@ import gestaofinanceira.api.domain.TipoDespesa;
 public interface DespesaService {
 
 	void novaDespesa(TipoDespesa descricao, BigDecimal valor, LocalDate dataVencimento);
-	
+
 	void salvar(Despesa despesas);
-	
+
 	void buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento); // verificar sobre os tipos TipoDespesa
 
-	void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, int conta);
+	void pagarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento, int conta);
 
 	void excluir(TipoDespesa descricao);
 
-	void buscarTodasAsDespesas(TipoDespesa descricao, LocalDate dataVencimento);	
+	void buscarTodasAsDespesas(TipoDespesa descricao, LocalDate dataVencimento);
 }
