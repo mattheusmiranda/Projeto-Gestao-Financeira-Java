@@ -1,8 +1,6 @@
 package gestaofinanceira.api.view;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import gestaofinanceira.api.domain.ContaBancaria;
@@ -17,7 +15,7 @@ public class TelaContaBancaria {
 	public void imprimirMenu() {
 		int opcaoSelecionada = 0;
 		while (opcaoSelecionada >= 0 && opcaoSelecionada <= 3) {
-			System.out.println("------- MENU DE DESPESAS -----------------------");
+			System.out.println("------- MENU DO BANCO -----------------------");
 			System.out.println("- 1) Criar uma nova conta             		   -");
 			System.out.println("- 2) Procurar uma conta               		   -");
 			System.out.println("- 3) Fazer transferencia              		   -");
@@ -27,7 +25,8 @@ public class TelaContaBancaria {
 			System.out.println("------------------------------------------------");
 			
 			System.out.println("Escolha uma opção: ");
-			opcaoSelecionada = Integer.parseInt(scanner.nextLine());
+
+			opcaoSelecionada = Integer.valueOf(scanner.nextLine());
 			
 			if (opcaoSelecionada == 1) {
 				cadastrar();
@@ -35,7 +34,7 @@ public class TelaContaBancaria {
 			} else if (opcaoSelecionada == 2) {
 				procurarConta();
 			} else if (opcaoSelecionada == 3) {
-				// transferir
+				transferir();
 			}else if( opcaoSelecionada == 4) {
 				buscarComONumeroDaConta();
 			}else if( opcaoSelecionada == 5) {
@@ -57,18 +56,21 @@ public class TelaContaBancaria {
 		ContaBancaria novaConta = new ContaBancaria();
 		Pessoa pessoa = new Pessoa();
 		
-		System.out.println("Informe o numero da conta: ");
-		int numeroDigitado = scanner.nextInt();
-		novaConta.setNumero(numeroDigitado);  // TODO verificar se aceita pelo tipo 
-		
-		System.out.println("Informe o valor do seu saldo: ");
-		BigDecimal valorDigitado = scanner.nextBigDecimal();
-		novaConta.setSaldo(valorDigitado);
-		
 		System.out.println("Informe o nome do dono: ");
 		String nome = scanner.nextLine();
+		
 		pessoa.setNome(nome);
 		novaConta.setDono(pessoa);
+		
+		scanner.nextLine();
+		System.out.println("Informe o valor do seu saldo: ");
+		BigDecimal valorDigitado = new BigDecimal(scanner.nextLine());
+		novaConta.setSaldo(valorDigitado);
+
+		System.out.println("Informe o numero da conta: ");
+		int numeroDigitado = Integer.valueOf(scanner.nextLine());
+		novaConta.setNumero(numeroDigitado);
+		
 		
 		ContaBancariaRepository.salvar(novaConta);
 	}
@@ -84,31 +86,26 @@ public class TelaContaBancaria {
 		procurarConta.setDono(pessoa);
 		
 		System.out.println("Informe o numero da conta: ");
-		int numeroConta = scanner.nextInt();
+		int numeroConta = Integer.valueOf(scanner.nextLine());
 		procurarConta.setNumero(numeroConta);
 		
+		ContaBancariaRepository.buscarPorNomeDoDono(nome);
 	}
 	
 	public void transferir() {
-		// BigDecimal transferir, ContaBancaria contaBancariaParaTransferir, ContaBancaria contaBancariaParaReceber
-		ContaBancaria conta = new ContaBancaria();
-		ContaBancaria conta2 = new ContaBancaria();
 		
 		System.out.println("Informe o valor pra ser transferido: ");
 		BigDecimal valorDigitado = new BigDecimal(scanner.nextLine());
 		
 		System.out.println("Informe o numero da sua conta: ");
-		int num = scanner.nextInt();
-		conta.setNumero(num);
+		int num = Integer.valueOf(scanner.nextLine());
 		
 		System.out.println("Informe o numero da conta que voce deseja transferir: ");
-		int num2 = scanner.nextInt();
-		conta2.setNumero(num);
+		int num2= Integer.valueOf(scanner.nextLine());
 	
 		ContaBancariaServiceImpl av = new ContaBancariaServiceImpl();
-		av.transferir(valorDigitado, conta, conta2);
+		av.transferir(valorDigitado, num, num2);
 		
-	
 	}
 	
 	
@@ -122,7 +119,7 @@ public class TelaContaBancaria {
 	
 	public void buscarPeloNome() {
 		
-		System.out.println("Informe o nome do dono da conra: ");
+		System.out.println("Informe o nome do dono da conta: ");
 		String nomeDigitado = scanner.nextLine();
 		
 		ContaBancariaRepository.buscarPorNomeDoDono(nomeDigitado);

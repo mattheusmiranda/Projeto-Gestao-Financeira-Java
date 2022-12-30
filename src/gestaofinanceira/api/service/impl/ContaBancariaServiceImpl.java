@@ -28,12 +28,9 @@ public class ContaBancariaServiceImpl implements ContaBancariaService {
 	}
 
 	@Override
-	public void  transferir(BigDecimal transferir, ContaBancaria contaBancariaParaTransferir, ContaBancaria contaBancariaParaReceber) {
-		contaBancariaParaTransferir.setSaldo(contaBancariaParaTransferir.getSaldo().subtract(transferir));
-		contaBancariaParaReceber.setSaldo(contaBancariaParaReceber.getSaldo().add(transferir));
+	public void transferir(BigDecimal transferir, int contaBancariaParaTransferir, int contaBancariaParaReceber) {
+		ContaBancariaRepository.transferir(transferir, contaBancariaParaTransferir, contaBancariaParaReceber);
 		
-		ContaBancariaRepository.salvar(contaBancariaParaTransferir);
-		ContaBancariaRepository.salvar(contaBancariaParaReceber);
 	}
 
 	@Override

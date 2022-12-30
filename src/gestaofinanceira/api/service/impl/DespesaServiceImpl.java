@@ -25,7 +25,7 @@ public class DespesaServiceImpl implements DespesaService {
 
 	@Override
 	public void buscarTodasAsDespesas(TipoDespesa descricao, LocalDate dataVencimento) {
-		DespesaRepository.buscarUmaDespesas(descricao, dataVencimento);
+		DespesaRepository.buscarUmaDespesa(descricao, dataVencimento);
 
 	}
 
@@ -36,14 +36,14 @@ public class DespesaServiceImpl implements DespesaService {
 	}
 
 	@Override
-	public void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta) {
-		DespesaRepository.pagarUmaDespesas (descricao, valor,  conta);
+	public void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, int numeroConta) {
+		DespesaRepository.pagarUmaDespesas (descricao, valor,  numeroConta);
 
 	}
 
 	@Override
 	public void buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento) {
-		DespesaRepository.buscarUmaDespesas(descricao, dataVencimento);
+		DespesaRepository.buscarUmaDespesa(descricao, dataVencimento);
 		
 	}
 }

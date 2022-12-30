@@ -15,7 +15,7 @@ public interface DespesaService {
 	
 	void buscarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento); // verificar sobre os tipos TipoDespesa
 
-	void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta);
+	void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, int conta);
 
 	void excluir(TipoDespesa descricao);
 

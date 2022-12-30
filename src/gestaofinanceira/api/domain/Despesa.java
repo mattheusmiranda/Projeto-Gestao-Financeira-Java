@@ -6,10 +6,6 @@ import java.util.Objects;
 
 public class Despesa {
 
-	@Override
-	public String toString() {
-		return "Despesa: " + descricao;
-	}
 	private TipoDespesa descricao;
 	private BigDecimal valor;
 	private LocalDate dataVencimento;
@@ -69,6 +65,12 @@ public class Despesa {
 		Despesa other = (Despesa) obj;
 		return Objects.equals(dataVencimento, other.dataVencimento) && descricao == other.descricao;
 	}
+	@Override
+	public String toString() {
+		return "\nDescricao: " + descricao + "\nValor: " + valor + "\nDataVencimento: " + dataVencimento 
+				+ "\nStatus da conta: " + indicadorContaPaga + "\n-------------------------";
+	}
 
+	
 	
 }

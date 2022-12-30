@@ -32,14 +32,12 @@ public class Pessoa {
 		return contaBancaria;
 	}
 	
+
+	
 	@Override
 	public String toString() {
-		return "Nome " + nome;
+		return "Nome: " + nome + "\nCPF: " + cpf + "\nData Nascimento: " + dataNascimento;
 	}
-	public void setContaBancaria(ContaBancaria contaBancaria) {
-		this.contaBancaria = contaBancaria;
-	}
-	
 	public int getIdade() {
 		return 0;
 	}

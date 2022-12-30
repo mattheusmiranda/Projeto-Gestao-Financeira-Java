@@ -40,8 +40,7 @@ public class Inicio {
 			} else if (opcaoSelecionada == 0) {
 				return;
 			} else {
-				//TODO opção inválida, deixar digitar novamente
-				System.out.println("Opção invalida"); // TODO pensar depois 
+				System.out.println("Opção invalida");  
 			}
 		}
 	}

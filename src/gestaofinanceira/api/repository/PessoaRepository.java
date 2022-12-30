@@ -73,6 +73,7 @@ public class PessoaRepository {
 		
 			if (LISTA_DE_PESSOAS.contains(pessoa))
 				LISTA_DE_PESSOAS.remove(pessoa);
+			System.out.println("Usuario excluido");
 			return;
 	}
 
@@ -81,6 +82,8 @@ public class PessoaRepository {
 			if (pessoa.getCpf().equals(cpf)) {
 				System.out.println("CPF ja cadastrado");
 				return true;
+			}else {
+				System.out.println("CPF não foi cadastrado");
 			}
 		}
 		return false;

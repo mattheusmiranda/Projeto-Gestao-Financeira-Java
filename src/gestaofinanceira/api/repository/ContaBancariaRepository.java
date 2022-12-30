@@ -1,5 +1,6 @@
 package gestaofinanceira.api.repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +31,30 @@ public class ContaBancariaRepository {
 		}
 		return false;
 	}
+
+	public static  ContaBancaria transferir (BigDecimal transferir, int contaBancariaParaTransferir, int contaBancariaParaReceber) {
+		for(ContaBancaria contaBancaria : INFORMACOES_DA_CONTA) {
+			if(contaBancaria.getNumero() == contaBancariaParaTransferir) {
+				contaBancaria.setSaldo(contaBancaria.getSaldo().subtract(transferir));
+				ContaBancariaRepository.salvar(contaBancaria);
+				System.out.println("Seu saldo agora é: " + contaBancaria.getSaldo());
+				break;
+			}else {
+				System.out.println("erro");
+			}
+		}for(ContaBancaria contaBancaria : INFORMACOES_DA_CONTA) {
+			if(contaBancaria.getNumero() == contaBancariaParaReceber) {
+				contaBancaria.setSaldo(contaBancaria.getSaldo().add(transferir));
+				ContaBancariaRepository.salvar(contaBancaria);
+			}
+		}
+		return null;
+	}
 	
 	public static ContaBancaria buscarPorNumeroDaConta(int numeroConta) {
 		for(ContaBancaria contaBancaria : INFORMACOES_DA_CONTA) {
 			if(contaBancaria.getNumero() == numeroConta) {
-				return contaBancaria;
+				System.out.println(contaBancaria);
 			}
 		}
 		return null;
@@ -43,7 +63,7 @@ public class ContaBancariaRepository {
 	public static ContaBancaria buscarPorNomeDoDono(String nome) {
 		for(ContaBancaria contaBancaria : INFORMACOES_DA_CONTA) {  
 			if(contaBancaria.getDono().getNome().equals(nome)) {
-				return contaBancaria;
+				System.out.println(contaBancaria); 
 			}
 		}
 		return null;

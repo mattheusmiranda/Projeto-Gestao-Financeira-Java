@@ -17,7 +17,7 @@ public interface ContaBancariaService {
 	
 	boolean verificarDono(Pessoa pessoa, ContaBancaria conta);
 	
-	void transferir(BigDecimal transferir, ContaBancaria contaBancariaParaTransferir, ContaBancaria contaBancariaParaReceber);
+	void transferir(BigDecimal transferir, int contaBancariaParaTransferir, int contaBancariaParaReceber);
 	
 	void buscarPorNumeroDaConta(int numeroConta);
 	

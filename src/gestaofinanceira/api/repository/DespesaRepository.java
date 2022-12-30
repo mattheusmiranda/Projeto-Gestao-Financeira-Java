@@ -26,12 +26,7 @@ public class DespesaRepository {
 	}
 
 	public static void salvar(Despesa despesas) {
-		for (Despesa despesa : INFORMACOES_DE_DESPESA) {
-			if (despesa.equals(despesas)) {
-				despesa = despesas;
-				return;
-			}
-		}
+
 		INFORMACOES_DE_DESPESA.add(despesas);
 
 	}
@@ -65,30 +60,81 @@ public class DespesaRepository {
 			}
 			System.out.println("Conta não foi paga");
 			System.out.println("Pagar conta " + despesa.getDescricao());
-			DespesaRepository.pagarUmaDespesas(despesa.getDescricao(), despesa.getValor(), null);
+			DespesaRepository.pagarUmaDespesas(despesa.getDescricao(), despesa.getValor(), 0); // TODO ARRUMAR
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-	public static void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, ContaBancaria conta) {
-		// altera o indicador de pago da despesa, e salva a despesa
-		// e debita da conta o valor da despesa, e salva a conta
-		// ContaBancariaRepository conta = new ContaBancariaRepository();
-		// ContaBancariaServiceImpl contas = new ContaBancariaServiceImpl();
+	public static void pagarUmaDespesas(TipoDespesa descricao, BigDecimal valor, int conta) {
+		
 		for (ContaBancaria contas : ContaBancariaRepository.buscarTodos()) {
-			if (contas.getNumero() == conta.getNumero()) {
-				for (Despesa despesa : INFORMACOES_DE_DESPESA) {
-					if (despesa.getDescricao().equals(descricao)) {
-						conta.setSaldo(conta.getSaldo().subtract(valor)); // debita o valor da conta
-						despesa.setIndicadorContaPaga(true); // altera a conta para paga
-						salvar(despesa);
-					}
+			
+			if (contas.getNumero() == conta) {
+				contas.setSaldo(contas.getSaldo().subtract(valor));
+				System.out.println("Pagamento realizado com sucesso");
+				break;
+			}else {
+				System.out.println("Numero da conta inexistente");
+			}
+			for (Despesa despesa : INFORMACOES_DE_DESPESA) {
+				if (despesa.getDescricao().equals(descricao)) {
+					despesa.setIndicadorContaPaga(true); 
+					salvar(despesa);
+				}else {
 					System.out.println("Conta inexistente");
 				}
-
+				return;
+				
 			}
+			
 			System.out.print("Numero da conta inexistente");
 		}
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

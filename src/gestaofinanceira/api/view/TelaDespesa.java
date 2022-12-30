@@ -9,19 +9,20 @@ import gestaofinanceira.api.domain.ContaBancaria;
 import gestaofinanceira.api.domain.Despesa;
 import gestaofinanceira.api.domain.Pessoa;
 import gestaofinanceira.api.domain.TipoDespesa;
+import gestaofinanceira.api.repository.ContaBancariaRepository;
 import gestaofinanceira.api.repository.DespesaRepository;
+import gestaofinanceira.api.service.ContaBancariaService;
+import gestaofinanceira.api.service.impl.ContaBancariaServiceImpl;
 
 public class TelaDespesa {
 
-
 	Scanner scanner = new Scanner(System.in);
-	private ContaBancaria n;
 	
 	 //DespesaRepository v = new DespesaService();
 	
 	public void imprimirMenu() {
 		int opcaoSelecionada = 0;
-		while (opcaoSelecionada >= 0 && opcaoSelecionada <= 3) {
+		while (opcaoSelecionada >= 0 && opcaoSelecionada <= 15) {
 			System.out.println("------- MENU DE DESPESAS --------------");
 			System.out.println("- 1) Cadastrar nova despesa           -");
 			System.out.println("- 2) Mostrar uma despesa              -");
@@ -66,7 +67,7 @@ public class TelaDespesa {
 		System.out.println("Informe o nome da despesa para cadastro: ");
 		String  nomeDigitado = scanner.nextLine();
 		respostaDespesa = TipoDespesa.valueOf(nomeDigitado);
-		novaDespesa.setDescricao(respostaDespesa);// TODO arrumar o tipo do atributo 
+		novaDespesa.setDescricao(respostaDespesa); 
 
 		System.out.println("Informe o valor da despesa: ");
 		BigDecimal valorDigitado = new BigDecimal(scanner.nextLine());
@@ -98,8 +99,6 @@ public class TelaDespesa {
 	
 	public void pagarDespesa() {
 
-		ContaBancaria conta = new ContaBancaria();
-	
 		TipoDespesa nomeDaDespesa;
 		System.out.println("Informe o nome da despesa para ser paga: ");
 		String nomeDespesa = scanner.nextLine();
@@ -109,16 +108,16 @@ public class TelaDespesa {
 		BigDecimal valorDigitado = new BigDecimal(scanner.nextLine());
 		
 		System.out.println("Informe o numero da sua conta para realizar a debitação: ");
-		int numeroDaContaParaTransferencia = scanner.nextInt(); // TODO mudar em despesaService o tipo da conta 
+		int numeroDaContaParaTransferencia = Integer.valueOf(scanner.nextInt());
 		
-		conta.setNumero(numeroDaContaParaTransferencia);
-		DespesaRepository.pagarUmaDespesas(nomeDaDespesa, valorDigitado, conta);
+		DespesaRepository.pagarUmaDespesas(nomeDaDespesa, valorDigitado, numeroDaContaParaTransferencia);
 		
 	}
 	
 	public void buscarTodas() {
 	
-		DespesaRepository.buscarTodasAsDespesas();
+		System.out.println(DespesaRepository.buscarTodasAsDespesas());
+		
 		
 	}
 	
