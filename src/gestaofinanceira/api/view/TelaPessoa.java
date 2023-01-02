@@ -54,9 +54,16 @@ public class TelaPessoa {
 
 		Pessoa novaPessoa = new Pessoa();
 
-		System.out.println("Informe o nome para cadastro: ");
-		String nomeDigitado = scanner.nextLine();
-		novaPessoa.setNome(nomeDigitado);
+		try {
+			System.out.println("Informe o nome para cadastro: "); // TODO verificar como tratar para numeros 
+			String nomeDigitado = scanner.nextLine();				// TODO validar datas, e o cpf
+			novaPessoa.setNome(nomeDigitado);
+			
+		}
+		catch (RuntimeException e) {
+			System.out.println(e.getMessage());
+			
+		}
 
 		System.out.println("Informe o CPF para cadastro: ");
 		String cpfDigitado = scanner.nextLine();

@@ -38,6 +38,7 @@ public class DespesaRepository {
 	public static void salvar(Despesa despesas) {
 
 		INFORMACOES_DE_DESPESA.add(despesas);
+		System.out.println("Despesa salva com sucesso");
 
 	}
 
@@ -65,6 +66,7 @@ public class DespesaRepository {
 				for (Despesa tipoDespesa2 : INFORMACOES_DE_DESPESA) {
 					if (tipoDespesa2.getDescricao().equals(descricao)) {
 						INFORMACOES_DE_DESPESA.remove(tipoDespesa2);
+						System.out.println("Despesa excluida");
 						return;
 					}
 				}
@@ -78,7 +80,7 @@ public class DespesaRepository {
 	public static void pagarUmaDespesas(TipoDespesa descricao, LocalDate dataVencimento, int conta) {
 		for (ContaBancaria contas : ContaBancariaRepository.buscarTodos()) {
 			if (contas.getNumero() == conta) {
-				for (Despesa despesa : INFORMACOES_DE_DESPESA) { /* TODO validar por data da despesa tbhm */
+				for (Despesa despesa : INFORMACOES_DE_DESPESA) { 
 					if (despesa.getDescricao().equals(descricao)
 							&& despesa.getDataVencimento().equals(dataVencimento)) {
 						contas.setSaldo(contas.getSaldo().subtract(despesa.getValor()));

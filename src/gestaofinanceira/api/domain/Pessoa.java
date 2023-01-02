@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Pessoa {
+
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
@@ -14,6 +15,10 @@ public class Pessoa {
 	}
 
 	public void setNome(String nome) {
+		if(nome == "9") {
+			throw new RuntimeException("Informe um nome com letra");
+		}
+		
 		this.nome = nome;
 	}
 

@@ -16,6 +16,13 @@ public class Despesa {
 	}
 
 	public void setDescricao(TipoDespesa descricao) {
+		
+		/*
+		 * if(descricao.equals(TipoDespesa) == false) { throw new
+		 * RuntimeException("Iforme um dispesa valida"); System.out.println("LUZ\n" +
+		 * "AGUA\n" + "FATURA_CARTAO\n" + "NETFLIX\n"); }
+		 */		
+		
 		this.descricao = descricao;
 	}
 

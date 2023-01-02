@@ -28,9 +28,10 @@ public class Inicio {
 			System.out.println("- 0) Sair do sistema                                 -");
 			System.out.println("------------------------------------------------------");
 			
-			System.out.println("EScolha uma opção:");
+			System.out.println("Escolha uma opção:");
 			opcaoSelecionada = Integer.parseInt(scanner.nextLine());
 			
+			// TODO onde fazer a verificação (throw new RuntimeException)
 			if (opcaoSelecionada == 1) {
 				telaPessoa.imprimirMenu();
 			} else if (opcaoSelecionada == 2) {

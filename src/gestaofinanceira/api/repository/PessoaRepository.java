@@ -27,6 +27,7 @@ public class PessoaRepository {
 		for (Pessoa pessoaBancoDeDados : LISTA_DE_PESSOAS) {
 			if (pessoa.equals(pessoaBancoDeDados)) {
 				pessoaBancoDeDados = pessoa;
+				System.out.println("Usuario salvo");
 				return;
 			}
 		}
@@ -56,6 +57,8 @@ public class PessoaRepository {
 			if (pessoa.getCpf().equals(cpf)) {
 				System.out.println(pessoa);
 				return;
+			}else {
+				System.out.println("O CPF indicado não pertence a nenhum usuario");
 			}
 		}
 		return;
@@ -67,6 +70,8 @@ public class PessoaRepository {
 			if (pessoa.getNome().startsWith(nome)) {
 				pessoasEncontradas.add(pessoa);
 				System.out.println(pessoa);
+			}else {
+				System.out.println("o nome do usuario indicado não foi encontrado");
 			}
 		}
 		return pessoasEncontradas;
@@ -80,10 +85,13 @@ public class PessoaRepository {
 
 	public static void excluir(Pessoa pessoa) {
 
-		if (LISTA_DE_PESSOAS.contains(pessoa))
+		if (LISTA_DE_PESSOAS.contains(pessoa)) {
 			LISTA_DE_PESSOAS.remove(pessoa);
-		System.out.println("Usuario excluido");
-		return;
+			System.out.println("Usuario excluido");
+			return;		
+		}else {
+			System.out.println("Usuario não encontrado");
+		}
 	}
 
 	public static boolean cpfJaCadastrado(String cpf) {
